@@ -1,12 +1,42 @@
 <html>
-  <script src="https://unpkg.com/react@16.7.0/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@16.7.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <body>
     <div id="app">
-      <script type="text/jsx">
+      <script type="text/babel">
+        function HomePage() {
+          const [likes, setLikes] = React.useState(0);
+
+          const names = ["jon wick", "jennifer lawrence", "tom cruise"];
+
+          function handleClick() {
+            setLikes(likes + 1);
+            console.log("increment the count");
+          }
+
+          return (
+            <div>
+              <Header title="I love React <3" />
+              <Header />
+              <ul>
+                {names.map((name) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
+
+              <button onClick={handleClick}>Like ({likes})</button>
+            </div>
+          );
+        }
+
+        function Header({ title }) {
+          console.log(title);
+          return <h1>{title ? title : "COOL NEW BLOG POST"}</h1>;
+        }
+
         const app = document.getElementById("app");
-        ReactDOM.render(<h1>This is our web WoW!</h1>, app);
+        ReactDOM.render(<HomePage />, app);
       </script>
     </div>
   </body>
